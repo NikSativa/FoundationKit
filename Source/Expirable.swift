@@ -46,7 +46,7 @@ extension Lifetime: ExpressibleByIntegerLiteral {
 
 @propertyWrapper
 public struct Expirable<Value: ExpressibleByNilLiteral> {
-    private var _value: Value = nil
+    private var _value: Value
     private let lifetime: Lifetime
     private var savedDate = Date()
 
@@ -64,15 +64,15 @@ public struct Expirable<Value: ExpressibleByNilLiteral> {
         }
     }
 
-    public init(lifetimeInterval interval: TimeInterval,
-                value: Value = nil) {
+    public init(wrappedValue: Value = nil,
+                lifetimeInterval interval: TimeInterval) {
         self.lifetime = Lifetime(expires: interval)
-        self._value = value
+        self._value = wrappedValue
     }
 
-    public init(lifetime: Lifetime,
-                value: Value = nil) {
+    public init(wrappedValue: Value = nil,
+                lifetime: Lifetime) {
         self.lifetime = lifetime
-        self._value = value
+        self._value = wrappedValue
     }
 }
