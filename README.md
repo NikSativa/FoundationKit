@@ -2,34 +2,6 @@
 
 FoundationKit is a collection of extensions and utilities for Foundation framework.
 
-### Defaults
-Wrapper for UserDefaults that allows you to store and retrieve Codable objects.
-
-```swift
-import FoundationKit
-struct User: Codable {
-    let name: String
-    let email: String
-    let age: Int
-}
-
-final class UserViewModel {
-    @Defaults("user", defaultValue: nil)
-    var user: User? {
-        didSet {
-            print("new user: \(user)")
-        }
-    }
-}
-```
-
-### Expirable
-Property wrapper that allows you to set expiration time for the value.
-
-```swift
-@Expirable(lifetime: .oneHour) var token: String?
-```
-
 ### LinkDetector
 Utility that allows you to detect links in a given string.
 
