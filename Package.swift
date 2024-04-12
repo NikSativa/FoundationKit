@@ -17,7 +17,7 @@ let package = Package(
         .library(name: "FoundationKitTestHelpers", targets: ["FoundationKitTestHelpers"])
     ],
     dependencies: [
-        .package(url: "https://github.com/NikSativa/SpryKit.git", .upToNextMajor(from: "2.2.2"))
+        .package(url: "https://github.com/NikSativa/SpryKit.git", .upToNextMajor(from: "2.2.3"))
     ],
     targets: [
         .target(name: "FoundationKit",
