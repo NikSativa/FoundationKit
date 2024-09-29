@@ -12,11 +12,10 @@ let package = Package(
         .watchOS(.v6)
     ],
     products: [
-        .library(name: "FoundationKit", targets: ["FoundationKit"]),
-        .library(name: "FoundationKitTestHelpers", targets: ["FoundationKitTestHelpers"])
+        .library(name: "FoundationKit", targets: ["FoundationKit"])
     ],
     dependencies: [
-        .package(url: "https://github.com/NikSativa/SpryKit.git", .upToNextMajor(from: "2.2.3"))
+        .package(url: "https://github.com/NikSativa/SpryKit.git", .upToNextMajor(from: "3.0.0"))
     ],
     targets: [
         .target(name: "FoundationKit",
@@ -24,23 +23,16 @@ let package = Package(
                 ],
                 path: "Source",
                 resources: [
-                    .copy("../PrivacyInfo.xcprivacy")
-                ]),
-        .target(name: "FoundationKitTestHelpers",
-                dependencies: [
-                    "FoundationKit",
-                    "SpryKit"
-                ],
-                path: "TestHelpers",
-                resources: [
-                    .copy("../PrivacyInfo.xcprivacy")
+                    .process("PrivacyInfo.xcprivacy")
                 ]),
         .testTarget(name: "FoundationKitTests",
                     dependencies: [
                         "FoundationKit",
-                        "FoundationKitTestHelpers",
                         "SpryKit",
                     ],
-                    path: "Tests")
+                    path: "Tests",
+                    resources: [
+                        .process("TestAssets.xcassets")
+                    ])
     ]
 )

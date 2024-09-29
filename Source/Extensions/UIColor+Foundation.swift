@@ -1,4 +1,4 @@
-#if os(iOS)
+#if canImport(UIKit)
 import UIKit
 
 public extension UIColor {
@@ -33,6 +33,7 @@ public extension UIColor {
                   alpha: CGFloat(Int(hex & 0x000000FF) >> 0) / 255)
     }
 
+    #if !os(watchOS)
     static func colorWith(dynamicProvider provider: @escaping (Style) -> UIColor) -> UIColor {
         return .init(dynamicProvider: { traits in
             switch traits.userInterfaceStyle {
@@ -66,6 +67,7 @@ public extension UIColor {
             }
         })
     }
+    #endif
 }
 
 public extension UIColor {

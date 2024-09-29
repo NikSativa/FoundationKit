@@ -4,10 +4,16 @@ public protocol NotificationDispatching {
     typealias Notification = Foundation.Notification
     typealias Name = Notification.Name
 
+    #if swift(>=6.0)
+    typealias Handler = @Sendable (Notification) -> Void
+    #else
+    typealias Handler = (Notification) -> Void
+    #endif
+
     func addObserver(forName name: Name,
                      object obj: Any?,
                      queue: OperationQueue?,
-                     using block: @escaping @Sendable (Notification) -> Void) -> NotificationToken
+                     using block: @escaping Handler) -> NotificationToken
 
     func post(_ notification: Notification)
     func post(name aName: Name,
@@ -19,7 +25,7 @@ public extension NotificationDispatching {
     func addObserver(forName name: Name,
                      object obj: Any? = nil,
                      queue: OperationQueue? = nil,
-                     using block: @escaping @Sendable (Notification) -> Void) -> NotificationToken {
+                     using block: @escaping Handler) -> NotificationToken {
         addObserver(forName: name, object: nil, queue: nil, using: block)
     }
 
@@ -44,7 +50,7 @@ extension NotificationDispatcher: NotificationDispatching {
     public func addObserver(forName name: Name,
                             object obj: Any?,
                             queue: OperationQueue?,
-                            using block: @escaping @Sendable (Notification) -> Void) -> NotificationToken {
+                            using block: @escaping Handler) -> NotificationToken {
         let token = notificationCenter.addObserver(forName: name, object: obj, queue: queue, using: block)
         return .init(token: token)
     }
@@ -87,3 +93,7 @@ public final class NotificationToken {
         NotificationCenter.default.removeObserver(token)
     }
 }
+
+#if swift(>=6.0)
+extension NotificationToken: @unchecked Sendable {}
+#endif

@@ -32,3 +32,7 @@ extension UUIDProvider: UUIDProviding {
         return value
     }
 }
+
+#if swift(>=6.0)
+extension UUIDProvider: @unchecked Sendable {}
+#endif

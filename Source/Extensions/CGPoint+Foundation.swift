@@ -1,3 +1,4 @@
+#if canImport(CoreGraphics)
 import CoreGraphics
 import Foundation
 
@@ -111,3 +112,4 @@ public extension CGPoint {
         return atan2(y, x)
     }
 }
+#endif

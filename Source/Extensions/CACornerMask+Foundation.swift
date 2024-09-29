@@ -1,4 +1,4 @@
-#if os(iOS) || os(macOS) || os(visionOS) || os(tvOS)
+#if canImport(QuartzCore) && !os(watchOS)
 import Foundation
 import QuartzCore
 
