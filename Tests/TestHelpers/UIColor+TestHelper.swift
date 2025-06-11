@@ -7,13 +7,13 @@ import UIKit
 public extension UIColor {
     func real(_ style: Style) -> UIColor {
         if #available(iOS 13, *) {
-            let userInterfaceStyle: UIUserInterfaceStyle
-            switch style {
-            case .dark:
-                userInterfaceStyle = .dark
-            case .light:
-                userInterfaceStyle = .light
-            }
+            let userInterfaceStyle: UIUserInterfaceStyle =
+                switch style {
+                case .dark:
+                    .dark
+                case .light:
+                    .light
+                }
             let traitCollection = UITraitCollection(userInterfaceStyle: userInterfaceStyle)
             return resolvedColor(with: traitCollection)
         }

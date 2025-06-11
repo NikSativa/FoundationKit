@@ -1,5 +1,4 @@
 import Foundation
-
 @testable import FoundationKit
 
 public extension NotificationToken {

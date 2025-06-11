@@ -1,8 +1,7 @@
 import Foundation
+import FoundationKit
 import SpryKit
 import XCTest
-
-import FoundationKit
 
 final class OptionalTests: XCTestCase {
     private enum OError: Error {

@@ -56,11 +56,14 @@ public extension UIColor {
             switch (hexWithAlpha, style) {
             case (true, .light):
                 return .init(hexWithAlpha: light)
+
             case (false, .light):
                 return .init(hex: light, alpha: alpha)
+
             case (true, .dark):
                 let hex = dark ?? light
                 return .init(hexWithAlpha: hex)
+
             case (false, .dark):
                 let hex = dark ?? light
                 return .init(hex: hex, alpha: alpha)
