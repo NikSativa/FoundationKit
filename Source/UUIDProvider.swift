@@ -11,7 +11,7 @@ public extension UUIDProviding {
     }
 }
 
-public final class UUIDProvider {
+public final class UUIDProvider: @unchecked Sendable {
     private var _cached: String?
 
     public init() {}
@@ -32,7 +32,3 @@ extension UUIDProvider: UUIDProviding {
         return value
     }
 }
-
-#if swift(>=6.0)
-extension UUIDProvider: @unchecked Sendable {}
-#endif

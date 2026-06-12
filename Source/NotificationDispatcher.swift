@@ -4,11 +4,7 @@ public protocol NotificationDispatching {
     typealias Notification = Foundation.Notification
     typealias Name = Notification.Name
 
-    #if swift(>=6.0)
     typealias Handler = @Sendable (Notification) -> Void
-    #else
-    typealias Handler = (Notification) -> Void
-    #endif
 
     func addObserver(forName name: Name,
                      object obj: Any?,
@@ -66,7 +62,7 @@ extension NotificationDispatcher: NotificationDispatching {
     }
 }
 
-public final class NotificationToken {
+public final class NotificationToken: @unchecked Sendable {
     private let token: NSObjectProtocol
 
     internal init(token: NSObjectProtocol) {
@@ -93,7 +89,3 @@ public final class NotificationToken {
         NotificationCenter.default.removeObserver(token)
     }
 }
-
-#if swift(>=6.0)
-extension NotificationToken: @unchecked Sendable {}
-#endif

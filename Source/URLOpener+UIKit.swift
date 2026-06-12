@@ -2,7 +2,6 @@
 import Foundation
 import UIKit
 
-#if swift(>=6.0)
 @MainActor
 public protocol UIURLOpening: Sendable {
     typealias CompletionHandler = @MainActor @Sendable (Bool) -> Void
@@ -25,28 +24,6 @@ public final class UIURLOpener {
         self.app = app
     }
 }
-#else
-public protocol UIURLOpening {
-    typealias CompletionHandler = (Bool) -> Void
-
-    func open(_ url: URL,
-              options: [UIApplication.OpenExternalURLOptionsKey: Any],
-              completion: @escaping CompletionHandler)
-    func open(_ url: URL,
-              completion: @escaping CompletionHandler)
-    func open(_ url: URL,
-              options: [UIApplication.OpenExternalURLOptionsKey: Any])
-    func open(_ url: URL)
-}
-
-public final class UIURLOpener {
-    private let app: UIApplication
-
-    public init(app: UIApplication) {
-        self.app = app
-    }
-}
-#endif
 
 extension UIURLOpener: UIURLOpening {
     private func open(url: URL,
